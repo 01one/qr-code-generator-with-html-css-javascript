@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <style>
+    input[type="text"] {
+      width: 400px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    #qr-code-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #qr-code-button:hover {
+      background-color: #45a049;
+    }
+
+    #qr-code-image {
+      margin-top: 30px;
+      width: 200px;
+      height: 200px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <h1>QR Code Generator</h1>
+    <input type="text" id="qr-code-text-input" placeholder="Enter website URL or text">
+    <button id="qr-code-button" onclick="generateQRCode()">Generate QR Code</button>
+    <div id="qr-code-image"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    var qrcode = null;
+    function generateQRCode() {
+      var text = document.getElementById('qr-code-text-input').value;
+      if (text === '') return;
+      if (qrcode !== null) {
+        qrcode.clear();
+        qrcode.makeCode(text);
+      } else {
+        qrcode = new QRCode(document.getElementById('qr-code-image'), { text: text, width: 400, height: 400 });
+      }
+      document.getElementById('qr-code-image').style.display = 'block';
+    }
+  </script>
+</body>
+
+</html>
